@@ -7,7 +7,7 @@ type HomePageProps = {};
 
 export const HomePage: FC<HomePageProps> = () => {
   const history = useHistory();
-  const goToBrowserPage = () => console.log('*********************') || history.push(RouterPath.Browser);
+  const goToBrowserPage = () => history.push(RouterPath.Browser);
 
   return(
     <>
