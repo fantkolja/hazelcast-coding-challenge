@@ -5,6 +5,7 @@ import { BrowserPage } from './pages/BrowserPage';
 import { RouterPath } from './constants';
 import { AuthProvider } from './components/AuthProvider';
 import { AuthCallback } from './pages/AuthCallback';
+import { ApiProvider } from './components/ApiProvider';
 
 const appRouterConfig = {
   pages: [{
@@ -24,7 +25,9 @@ export const App = () => {
   return (
     <div className="app">
       <AuthProvider>
-        <AppRouter config={appRouterConfig} />
+        <ApiProvider>
+          <AppRouter config={appRouterConfig} />
+        </ApiProvider>
       </AuthProvider>
     </div>
   );

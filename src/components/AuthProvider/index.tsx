@@ -1,10 +1,11 @@
-import React, { createContext, FC, ReactNode } from 'react';
+import React, { createContext, FC } from 'react';
 import { GithubAuthService } from '../../services/auth';
 import { AuthContextValue } from '../../types';
 import { tokenStorageKey } from '../../constants';
 
 const authService = new GithubAuthService();
 
+// @todo: obtain new token if this invalidates
 const state: AuthContextValue = {
   token: sessionStorage.getItem(tokenStorageKey),
   onCodeReceive: async (code: string) => {
