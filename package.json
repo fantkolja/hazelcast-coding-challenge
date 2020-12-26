@@ -36,7 +36,7 @@
   "scripts": {
     "start": "npm run server && npm run client",
     "client": "react-scripts start",
-    "server": "ts-node ./server.ts",
+    "server": "ts-node --project tsconfig-server.json ./server.ts",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"

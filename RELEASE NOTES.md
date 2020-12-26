@@ -5,7 +5,7 @@ so a small server was needed. Check [this](https://github.com/isaacs/github/issu
 ### Folder structure
 There should actually be a monorepo or two separate repos with client and server side,
 but due to the nature of the project I've decided just to add one single server file to the 
-frontend part. 
+frontend part. I know it's pretty ugly but what you can do with the lack of time...
 
 ### Environment variables and security
 Of course in a real life project I would never push sensitive variables and client secrets to the repo,
