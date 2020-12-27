@@ -1,3 +1,5 @@
+@import '../../styles/constants';
+
 .loadingContent {
   position: relative;
   z-index: 0;
@@ -12,5 +14,5 @@
   align-items: center;
   z-index: 1;
   opacity: 1;
-  background-color: rgba(white, .7);
+  background-color: rgba($color-brand-white, .7);
 }

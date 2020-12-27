@@ -1,0 +1,10 @@
+@import '../constants';
+
+body {
+  font-family: 'Roboto', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: $color-text-primary;
+  font-weight: 500;
+  font-size: $default-font-size;
+}

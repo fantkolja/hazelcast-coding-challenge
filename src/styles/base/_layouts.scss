@@ -1,0 +1,17 @@
+@import '../constants';
+
+html {
+  height: 100%;
+}
+
+body,
+#root,
+.app {
+  min-height: 100%;
+  height: 100%;
+}
+
+#loader-root {
+  position: relative;
+  z-index: 99999;
+}
