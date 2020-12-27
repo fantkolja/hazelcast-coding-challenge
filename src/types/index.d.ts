@@ -85,8 +85,13 @@ export interface RepositoryDetailsQueryResultData {
   repository: RepositoryDetailsQueryResult;
 }
 
+export interface RepositoryExpandedDetailsStar {
+  starredAt: string;
+  starsCount: number;
+}
+
 export interface RepositoryExpandedDetails extends RepositoryDetailsBase {
-  stars: string[];
+  stars: RepositoryExpandedDetailsStar[];
 }
 
 export interface RepositorySearchQueryResult {

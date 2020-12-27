@@ -1,7 +1,7 @@
 import React, { FC, useCallback, useContext, useEffect, useState } from 'react'
 import { AuthContext } from '../../components/AuthProvider';
 import { useHistory } from 'react-router-dom';
-import { RouterPath } from '../../constants';
+import { dataPageSize, RouterPath } from '../../constants';
 import { RepositoryList } from '../../components/RepositoryList';
 import {
   RepositoryDetailsQueryResultData,
@@ -42,7 +42,15 @@ export const BrowserPage: FC<BrowserPageProps> = () => {
     }
   }, [expanded, loadRepositoryDetails]);
 
-  // @todo: handle error
+  useEffect(() => {
+    const error = repositoryDetailsQueryResult.error
+      || viewerRepositoriesQueryResult.error
+      || repositorySearchQueryResult.error;
+    if (error) {
+      // @todo: handle error
+      console.error(error);
+    }
+  }, [repositoryDetailsQueryResult, viewerRepositoriesQueryResult, repositorySearchQueryResult]);
 
   useEffect(() => {
     setIsLoading(repositoryDetailsQueryResult.loading
@@ -60,9 +68,11 @@ export const BrowserPage: FC<BrowserPageProps> = () => {
         description: repository.description,
         homepageUrl: repository.homepageUrl,
         stars: [
-          repository.createdAt,
           ...repository.stargazers.edges
-            .map(({ starredAt }) => starredAt)
+            .map(({ starredAt }, i, arr) => ({
+              starredAt,
+              starsCount: repository.stargazerCount - arr.length + i + 1,
+            }))
         ],
       });
     }

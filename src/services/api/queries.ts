@@ -21,6 +21,8 @@ export const VIEWER_REPOSITORIES = gql`
   }
 `;
 
+// @todo: dataPageSize should be a query var
+
 export const REPOSITORY_DETAILS = gql`
   query RepositoryDetails($name: String!, $owner: String!) {
     repository(name: $name, owner: $owner) {
@@ -29,7 +31,7 @@ export const REPOSITORY_DETAILS = gql`
       description
       homepageUrl
       stargazerCount
-      stargazers(first: ${dataPageSize}) {
+      stargazers(last: ${dataPageSize}) {
         edges {
           starredAt
           cursor

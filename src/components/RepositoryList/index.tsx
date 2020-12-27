@@ -48,6 +48,7 @@ export const RepositoryList: FC<RepositoryListProps> = ({
               {expanded && expanded.id === item.id
                 ? <RepositoryDetails
                     stars={expanded.stars}
+                    createdAt={expanded.createdAt}
                     description={expanded.description}
                     homepageUrl={expanded.homepageUrl}
                 /> : null}
