@@ -1,10 +1,9 @@
 import { gql } from '@apollo/client';
-import { dataPageSize } from '../../constants';
 
 export const VIEWER_REPOSITORIES = gql`
-  query GetOwnRepos {
+  query GetOwnRepos($dataPageSize: Int!) {
     viewer {
-      repositories(first: ${dataPageSize}) {
+      repositories(first: $dataPageSize) {
         totalCount
          edges {
           cursor
@@ -24,14 +23,14 @@ export const VIEWER_REPOSITORIES = gql`
 // @todo: dataPageSize should be a query var
 
 export const REPOSITORY_DETAILS = gql`
-  query RepositoryDetails($name: String!, $owner: String!) {
+  query RepositoryDetails($name: String!, $owner: String!, $dataPageSize: Int!) {
     repository(name: $name, owner: $owner) {
       id
       createdAt
       description
       homepageUrl
       stargazerCount
-      stargazers(last: ${dataPageSize}) {
+      stargazers(last: $dataPageSize) {
         edges {
           starredAt
           cursor
@@ -42,8 +41,8 @@ export const REPOSITORY_DETAILS = gql`
 `;
 
 export const REPOSITORY_SEARCH = gql`
-  query RepositorySearch($query: String!) {
-    search(type: REPOSITORY, query: $query, first: ${dataPageSize}) {
+  query RepositorySearch($query: String!, $dataPageSize: Int!) {
+    search(type: REPOSITORY, query: $query, first: $dataPageSize) {
     repositoryCount
     edges {
       cursor

@@ -101,3 +101,5 @@ export interface RepositorySearchQueryResult {
 export interface RepositorySearchQueryResultData {
   search: RepositorySearchQueryResult;
 }
+
+export type TimeSpan = 'year' | 'month' | 'day';

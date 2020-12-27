@@ -38,7 +38,7 @@ export const BrowserPage: FC<BrowserPageProps> = () => {
     if (expanded && expanded.id === item.id) {
       setExpanded(null);
     } else {
-      loadRepositoryDetails({ variables: { name: item.name, owner: item.owner } });
+      loadRepositoryDetails({ variables: { name: item.name, owner: item.owner, dataPageSize } });
     }
   }, [expanded, loadRepositoryDetails]);
 
@@ -113,9 +113,11 @@ export const BrowserPage: FC<BrowserPageProps> = () => {
 
   useEffect(() => {
     if (query) {
-      loadRepositorySearch({ variables: { query } });
+      loadRepositorySearch({ variables: { query, dataPageSize } });
     } else {
-      loadViewerRepositories();
+      loadViewerRepositories({
+        variables: { dataPageSize },
+      });
     }
   }, [query, loadRepositorySearch, loadViewerRepositories]);
 

@@ -2,6 +2,7 @@ import Chart, { LinearTickOptions } from 'chart.js';
 import { chartNodeID } from '../../constants';
 import { FC, memo, useEffect, useRef } from 'react';
 import { RepositoryExpandedDetailsStar } from '../../types';
+import { getOptimalTimeSpan } from '../../services/utils';
 
 type LineChartProps = {
   data: RepositoryExpandedDetailsStar[];
@@ -12,6 +13,7 @@ export const LineChart: FC<LineChartProps> = memo(({ data }) => {
 
   useEffect(() => {
     if (chartNode.current) {
+
       new Chart(chartNode.current, {
         type: 'line',
         data: {
@@ -38,7 +40,7 @@ export const LineChart: FC<LineChartProps> = memo(({ data }) => {
             xAxes: [{
               type: 'time',
               time: {
-                unit: 'year',
+                unit: getOptimalTimeSpan(data),
               },
             }],
           },
