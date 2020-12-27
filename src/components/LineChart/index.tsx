@@ -50,7 +50,7 @@ export const LineChart: FC<LineChartProps> = memo(({ data }) => {
   }, [data]);
 
   return (
-    <canvas ref={chartNode} id={chartNodeID} width="600" height="400" />
+    <canvas ref={chartNode} id={chartNodeID} width="600" height="250" />
   );
   // not the case for current application but in the future might be a thin place for performance
 }, (prev: LineChartProps, next: LineChartProps) => {

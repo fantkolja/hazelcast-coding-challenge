@@ -1,3 +1,7 @@
-.searchForm {
+@import '../../styles/constants';
 
+.searchForm {
+  :global(.MuiInputBase-input) {
+    padding: $indent 0;
+  }
 }

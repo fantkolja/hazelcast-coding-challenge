@@ -40,6 +40,7 @@ export const RepositorySearch: FC<RepositorySearchProps> = ({ onSearch, query })
         placeholder={placeholder}
         aria-placeholder={placeholder}
         value={inputValue}
+        className={styles.textField}
         InputProps={{
           endAdornment: (
             <InputAdornment position="end">

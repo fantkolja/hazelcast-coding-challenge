@@ -2,6 +2,7 @@ import { FC } from 'react';
 import { Link, Typography } from '@material-ui/core';
 import { LineChart } from '../LineChart';
 import { RepositoryExpandedDetailsStar } from '../../types';
+import styles from './index.module.scss';
 
 type RepositoryDetailsProps = {
   description: string;
@@ -17,7 +18,7 @@ export const RepositoryDetails: FC<RepositoryDetailsProps> = ({
                                                                 createdAt,
                                                               }) => {
   return (
-    <div>
+    <div className={styles.repositoryDetails}>
       <Typography variant="subtitle2">Created at: <em>
         {createdAt ? new Date(createdAt).toLocaleDateString() : '-'}
       </em></Typography>
