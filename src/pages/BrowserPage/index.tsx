@@ -5,7 +5,12 @@ import { dataPageSize, RouterPath } from '../../constants';
 import { gql, useQuery } from '@apollo/client';
 import { RepositoryList } from '../../components/RepositoryList';
 import { CircularProgress } from '@material-ui/core';
-import { RepositoryListItem, RepositoryListItemQueryResultEdge } from '../../types';
+import {
+  RepositoryDetailsQueryResultData,
+  RepositoryExpandedDetails,
+  RepositoryListItem,
+  RepositoryListItemQueryResultEdge
+} from '../../types';
 
 type BrowserPageProps = {};
 
@@ -52,23 +57,32 @@ export const BrowserPage: FC<BrowserPageProps> = () => {
   const history = useHistory();
   const { client, loading, error, data } = useQuery(VIEWER_REPOSITORIES);
   const [repositoryList, setRepositoryList] = useState<RepositoryListItem[]>([]);
-  const [expanded, setExpanded] = useState<string | null>(null);
+  const [expanded, setExpanded] = useState<RepositoryExpandedDetails | null>(null);
 
   const handleExpandedItem = useCallback((item: RepositoryListItem) => {
-    if (expanded === item.id) {
+    if (expanded && expanded.id === item.id) {
       setExpanded(null);
     } else {
       client
-        .query({
+        .query<RepositoryDetailsQueryResultData>({
           query: REPOSITORY,
           variables: { name: item.name, owner: item.owner },
         })
         .then(result => {
-          console.log(result);
-          setExpanded(item.id);
+          setExpanded({
+            id: item.id,
+            createdAt: result.data.repository.createdAt,
+            description: result.data.repository.description,
+            homepageUrl: result.data.repository.homepageUrl,
+            stars: [
+              result.data.repository.createdAt,
+              ...result.data.repository.stargazers.edges
+                .map(({ starredAt }) => starredAt)
+            ],
+          });
         });
     }
-  }, [expanded]);
+  }, [expanded, client]);
 
   // @todo: useRedirect()?
   // @todo: handle error

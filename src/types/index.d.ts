@@ -42,6 +42,31 @@ export interface RepositoryListItemQueryResultEdge {
   node: RepositoryListItemQueryResultNode;
 }
 
-export interface LineChartDataItem {
-  timestamp: string;
+export interface StargazerEdge {
+  cursor: string;
+  starredAt: string;
+}
+
+export interface StargazerList {
+  edges: StargazerEdge[];
+}
+
+interface RepositoryDetailsBase {
+  id: string;
+  createdAt: string;
+  description: string;
+  homepageUrl: string;
+}
+
+export interface RepositoryDetailsQueryResult extends RepositoryDetailsBase {
+  stargazerCount: number;
+  stargazers: StargazerList;
+}
+
+export interface RepositoryDetailsQueryResultData {
+  repository: RepositoryDetailsQueryResult;
+}
+
+export interface RepositoryExpandedDetails extends RepositoryDetailsBase {
+  stars: string[];
 }
