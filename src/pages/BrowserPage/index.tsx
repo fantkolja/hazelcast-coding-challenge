@@ -1,8 +1,8 @@
 import React, { FC, useCallback, useContext, useEffect, useState } from 'react'
 import { AuthContext } from '../../components/AuthProvider';
 import { useHistory } from 'react-router-dom';
-import { dataPageSize, RouterPath } from '../../constants';
-import { gql, useQuery } from '@apollo/client';
+import { RouterPath } from '../../constants';
+import { useQuery } from '@apollo/client';
 import { RepositoryList } from '../../components/RepositoryList';
 import { CircularProgress } from '@material-ui/core';
 import {
@@ -11,46 +11,9 @@ import {
   RepositoryListItem,
   RepositoryListItemQueryResultEdge
 } from '../../types';
+import { REPOSITORY, VIEWER_REPOSITORIES } from '../../services/api/queries';
 
 type BrowserPageProps = {};
-
-const VIEWER_REPOSITORIES = gql`
-  query GetOwnRepos {
-    viewer {
-      repositories(first: ${dataPageSize}) {
-        totalCount
-         edges {
-          cursor
-          node {
-            id
-            name,
-            owner {
-              login
-            }
-          }
-        }
-      }
-    }
-  }
-`;
-
-const REPOSITORY = gql`
-  query Repository($name: String!, $owner: String!) {
-    repository(name: $name, owner: $owner) {
-      id
-      createdAt
-      description
-      homepageUrl
-      stargazerCount
-      stargazers(first: ${dataPageSize}) {
-        edges {
-          starredAt
-          cursor
-        }
-      }
-    }
-  }
-`;
 
 export const BrowserPage: FC<BrowserPageProps> = () => {
   const { token } = useContext(AuthContext);
@@ -58,6 +21,10 @@ export const BrowserPage: FC<BrowserPageProps> = () => {
   const { client, loading, error, data } = useQuery(VIEWER_REPOSITORIES);
   const [repositoryList, setRepositoryList] = useState<RepositoryListItem[]>([]);
   const [expanded, setExpanded] = useState<RepositoryExpandedDetails | null>(null);
+
+  const handleSearch = (query: string) => {
+    console.log(query);
+  };
 
   const handleExpandedItem = useCallback((item: RepositoryListItem) => {
     if (expanded && expanded.id === item.id) {
@@ -111,6 +78,7 @@ export const BrowserPage: FC<BrowserPageProps> = () => {
         : <RepositoryList
           data={repositoryList}
           onExpanded={handleExpandedItem}
+          onSearch={handleSearch}
           expanded={expanded}
         />}
     </article>
