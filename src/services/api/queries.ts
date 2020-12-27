@@ -21,8 +21,8 @@ export const VIEWER_REPOSITORIES = gql`
   }
 `;
 
-export const REPOSITORY = gql`
-  query Repository($name: String!, $owner: String!) {
+export const REPOSITORY_DETAILS = gql`
+  query RepositoryDetails($name: String!, $owner: String!) {
     repository(name: $name, owner: $owner) {
       id
       createdAt
@@ -39,8 +39,8 @@ export const REPOSITORY = gql`
   }
 `;
 
-export const SEARCH = gql`
-  query Repository($query: String!) {
+export const REPOSITORY_SEARCH = gql`
+  query RepositorySearch($query: String!) {
     search(type: REPOSITORY, query: $query, first: ${dataPageSize}) {
     repositoryCount
     edges {

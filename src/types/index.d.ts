@@ -42,6 +42,24 @@ export interface RepositoryListItemQueryResultEdge {
   node: RepositoryListItemQueryResultNode;
 }
 
+// @todo: compare with RepositorySearchQueryResult
+export interface RepositoryListItemQueryResult {
+  totalCount: number;
+  edges: RepositoryListItemQueryResultEdge[];
+}
+
+export interface RepositoryListItemQueryResultData {
+  repositories: RepositoryListItemQueryResult;
+}
+
+export interface RepositoryListItemQueryResultViewerData {
+  viewer: RepositoryListItemQueryResultData;
+}
+
+export interface RepositoryListItemQueryResultData {
+  repositories: RepositoryListItemQueryResult;
+}
+
 export interface StargazerEdge {
   cursor: string;
   starredAt: string;
@@ -69,4 +87,12 @@ export interface RepositoryDetailsQueryResultData {
 
 export interface RepositoryExpandedDetails extends RepositoryDetailsBase {
   stars: string[];
+}
+
+export interface RepositorySearchQueryResult {
+  edges: RepositoryListItemQueryResultEdge[];
+}
+
+export interface RepositorySearchQueryResultData {
+  search: RepositorySearchQueryResult;
 }

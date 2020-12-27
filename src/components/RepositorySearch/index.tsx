@@ -2,6 +2,7 @@ import { ChangeEvent, FC, FormEvent, useState } from 'react';
 import { IconButton, InputAdornment, TextField } from '@material-ui/core';
 import { Search } from '@material-ui/icons';
 import styles from './index.module.scss';
+import { maxSearchQueryLength } from '../../constants';
 
 type RepositorySearchProps = {
   onSearch: (query: string) => void;
@@ -31,7 +32,6 @@ export const RepositorySearch: FC<RepositorySearchProps> = ({ onSearch }) => {
       <TextField
         fullWidth
         autoFocus
-        variant="outlined"
         placeholder={placeholder}
         aria-placeholder={placeholder}
         InputProps={{
@@ -44,7 +44,7 @@ export const RepositorySearch: FC<RepositorySearchProps> = ({ onSearch }) => {
           ),
         }}
         inputProps={{
-          maxLength: 300,
+          maxLength: maxSearchQueryLength,
         }}
         onChange={handleChange}
       />

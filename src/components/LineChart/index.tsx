@@ -6,11 +6,13 @@ type LineChartProps = {
   data: string[];
 };
 
+// @todo: memo to avoid unnecessary rerenders?
 export const LineChart: FC<LineChartProps> = ({ data }) => {
   const chartNode = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
     if (chartNode.current) {
+      console.log('NEW CHART', data);
       new Chart(chartNode.current, {
         type: 'line',
         data: {

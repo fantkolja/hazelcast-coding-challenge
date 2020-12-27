@@ -11,6 +11,7 @@ type RepositoryListProps = {
   expanded: RepositoryExpandedDetails | null;
   onExpanded: (item: RepositoryListItem) => void;
   onSearch: (query: string) => void;
+  heading: string;
 }
 
 export const RepositoryList: FC<RepositoryListProps> = ({
@@ -18,15 +19,17 @@ export const RepositoryList: FC<RepositoryListProps> = ({
                                                           expanded,
                                                           onExpanded,
                                                           onSearch,
+                                                          heading,
                                                         }) => {
   return (
     <section className={styles.repositoryList}>
-      <header>
+      <header className={styles.header}>
         <RepositorySearch
           onSearch={onSearch}
         />
       </header>
-      <main>
+      <main className={styles.listContainer}>
+        <h2>{heading}</h2>
         {data.map((item) => <Accordion
           key={item.id}
           expanded={!!expanded && expanded.id === item.id}
@@ -41,9 +44,10 @@ export const RepositoryList: FC<RepositoryListProps> = ({
             </Typography>
           </AccordionSummary>
           <AccordionDetails>
-            <LineChart
+            {expanded && expanded.id === item.id
+              ? <LineChart
               data={expanded ? expanded.stars : []}
-            />
+            /> : null}
           </AccordionDetails>
         </Accordion>)}
       </main>
