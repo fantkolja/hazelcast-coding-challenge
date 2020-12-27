@@ -3,35 +3,39 @@
 In the project directory, you can run:
 
 ### `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+Launches frontend (http://localhost:3000) and backend (http://localhost:3001) parts.\
 
 ### `npm test`
-
 Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
 ### `npm run build`
-
 Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## RELEASE NOTES
 
-### `npm run eject`
+### Further / Skipped steps (due to the lack of time and nature of this project)
+- [ ] Increase test coverage
+- [ ] Handle pagination
+- [ ] Add a "scrollTo" behavior on the `/browser` page. When the user opens a repository details
+  the window should scroll so that the upper bound of the opened repository is on top
+- [ ] Enhance a11y
+- [ ] Obtain new token if this invalidates
+- [ ] Add a proper API error handling instead of `console.error()`
+- [ ] Setup proper linting
+    - [ ] Customize linting rules. I would prefer airbnb as base rules.
+    - [ ] Add prettier
+- [ ] Optimize folder structure (see comments below)
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+### Server part
+Seems like it's not possible to accomplish GitHub authentication web flow only with browser-side code,
+so a small server was needed. Check [this](https://github.com/isaacs/github/issues/330) for further details.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Folder structure
+There should actually be a monorepo or two separate repos with client and server side,
+but due to the nature of the project I've decided just to add one single server file to the
+frontend part. I know it's pretty ugly but what you can do with the lack of time...
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
+### Environment variables and security
+Of course in a real life project I would never push sensitive variables and client secrets to the repo,
+But to simplify launching and testing the client secret is just hard coded on the server part :)

@@ -13,10 +13,6 @@ type PageComponent = typeof BrowserPage | typeof HomePage;
 type PageConfig<A> = {
   component: A,
   path: string,
-  // @todo: retrieve component generic
-  // @todo: https://artsy.github.io/blog/2018/11/21/conditional-types-in-typescript/
-  // props: A extends FC<infer P> ? P : A,
-  // props: any,
 };
 
 export type AppRouterConfig = {

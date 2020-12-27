@@ -20,8 +20,6 @@ export const VIEWER_REPOSITORIES = gql`
   }
 `;
 
-// @todo: dataPageSize should be a query var
-
 export const REPOSITORY_DETAILS = gql`
   query RepositoryDetails($name: String!, $owner: String!, $dataPageSize: Int!) {
     repository(name: $name, owner: $owner) {

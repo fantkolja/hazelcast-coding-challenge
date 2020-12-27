@@ -42,7 +42,6 @@ export interface RepositoryListItemQueryResultEdge {
   node: RepositoryListItemQueryResultNode;
 }
 
-// @todo: compare with RepositorySearchQueryResult
 export interface RepositoryListItemQueryResult {
   totalCount: number;
   edges: RepositoryListItemQueryResultEdge[];
@@ -103,3 +102,8 @@ export interface RepositorySearchQueryResultData {
 }
 
 export type TimeSpan = 'year' | 'month' | 'day';
+
+export interface UseURLSearchQueryResult {
+  param: string;
+  setParam: (value: string) => void;
+}

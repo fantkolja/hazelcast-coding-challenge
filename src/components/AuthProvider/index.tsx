@@ -5,23 +5,27 @@ import { tokenStorageKey } from '../../constants';
 
 const authService = new GithubAuthService();
 
+const onCodeReceive = async (code: string) => {
+  const token = await authService.exchangeCode(code);
+  if (token) {
+    sessionStorage.setItem(tokenStorageKey, token);
+    state.token = token;
+  }
+};
+
+const checkToken = (token: string | null) => {
+  if (!token) {
+    authService.init(`${window.location.origin}/auth-callback`);
+  } else {
+    console.warn('[WARN:AuthProvider] Token already acquired!');
+  }
+};
+
 // @todo: obtain new token if this invalidates
 const state: AuthContextValue = {
   token: sessionStorage.getItem(tokenStorageKey),
-  onCodeReceive: async (code: string) => {
-    const token = await authService.exchangeCode(code);
-    if (token) {
-      sessionStorage.setItem(tokenStorageKey, token);
-      state.token = token;
-    }
-  },
-  onAuthStart() {
-    if (!state.token) {
-      authService.init(`${window.location.origin}/auth-callback`);
-    } else {
-      console.warn('[WARN:AuthProvider] Token already acquired!');
-    }
-  },
+  onAuthStart: () => checkToken(state.token),
+  onCodeReceive,
 };
 export const AuthContext = createContext(state);
 

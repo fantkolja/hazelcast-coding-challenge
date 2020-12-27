@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { Typography } from '@material-ui/core';
+import { Link, Typography } from '@material-ui/core';
 import { LineChart } from '../LineChart';
 import { RepositoryExpandedDetailsStar } from '../../types';
 
@@ -18,11 +18,13 @@ export const RepositoryDetails: FC<RepositoryDetailsProps> = ({
                                                               }) => {
   return (
     <div>
-      <Typography variant="subtitle1">Created at: <em>
+      <Typography variant="subtitle2">Created at: <em>
         {createdAt ? new Date(createdAt).toLocaleDateString() : '-'}
       </em></Typography>
-      <Typography variant="subtitle1">Description: <em>{description || '-'}</em></Typography>
-      <Typography variant="subtitle1">Home Page: <em>{homepageUrl || '-'}</em></Typography>
+      <Typography variant="subtitle2">Description: <em>{description || '-'}</em></Typography>
+      <Typography variant="subtitle2">Home Page: <em>
+        {homepageUrl ? <Link href={homepageUrl} target="_blank">{homepageUrl}</Link> : '-'}
+      </em></Typography>
       <LineChart data={stars} />
     </div>
   );

@@ -12,7 +12,6 @@ app.post('/token', async (req, res) => {
   const clientSecret = 'ab0bbf7461554e48fa45f02bfd4e8ca7225407ba';
 
   try {
-    // @todo: fix typings
     // @ts-ignore
     const response = await axios.post(githubAuthTokenAccessEndpoint, {
       client_id: req.body.client_id,

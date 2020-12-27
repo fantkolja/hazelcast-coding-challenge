@@ -12,6 +12,7 @@ type RepositoryListProps = {
   onExpanded: (item: RepositoryListItem) => void;
   onSearch: (query: string) => void;
   heading: string;
+  query: string;
 }
 
 export const RepositoryList: FC<RepositoryListProps> = ({
@@ -20,6 +21,7 @@ export const RepositoryList: FC<RepositoryListProps> = ({
                                                           onExpanded,
                                                           onSearch,
                                                           heading,
+                                                          query,
                                                         }) => {
   return (
     <div className={styles.repositoryListContainer}>
@@ -27,6 +29,7 @@ export const RepositoryList: FC<RepositoryListProps> = ({
         <header className={styles.header}>
           <RepositorySearch
             onSearch={onSearch}
+            query={query}
           />
         </header>
         <main className={styles.listContainer}>

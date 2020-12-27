@@ -1,7 +1,7 @@
 import React, { FC, useCallback, useContext, useEffect, useState } from 'react'
 import { AuthContext } from '../../components/AuthProvider';
 import { useHistory } from 'react-router-dom';
-import { dataPageSize, RouterPath } from '../../constants';
+import { dataPageSize, repositoryQueryURLSearchName, RouterPath } from '../../constants';
 import { RepositoryList } from '../../components/RepositoryList';
 import {
   RepositoryDetailsQueryResultData,
@@ -14,6 +14,7 @@ import {
 import { REPOSITORY_DETAILS, REPOSITORY_SEARCH, VIEWER_REPOSITORIES } from '../../services/api/queries';
 import { useLazyQuery } from '@apollo/client';
 import { Loader } from '../../components/Loader';
+import { useURLSearchQuery } from '../../hooks/useURLSearchQuery';
 
 type BrowserPageProps = {};
 
@@ -27,11 +28,10 @@ export const BrowserPage: FC<BrowserPageProps> = () => {
   const [loadRepositoryDetails, repositoryDetailsQueryResult] = useLazyQuery<RepositoryDetailsQueryResultData>(REPOSITORY_DETAILS);
   const [repositoryList, setRepositoryList] = useState<RepositoryListItem[]>([]);
   const [expanded, setExpanded] = useState<RepositoryExpandedDetails | null>(null);
-  const [query, setQuery] = useState<string>('');
+  const { param: query, setParam } = useURLSearchQuery(repositoryQueryURLSearchName);
   const [isLoading, setIsLoading] = useState(false);
-
   const handleSearch = (newQuery: string) => {
-    setQuery(newQuery);
+    setParam(newQuery);
   };
 
   const handleExpandedItem = useCallback((item: RepositoryListItem) => {
@@ -104,7 +104,6 @@ export const BrowserPage: FC<BrowserPageProps> = () => {
     }
   }, [repositorySearchQueryResult]);
 
-  // @todo: useRedirect()?
   useEffect(() => {
     if (!token) {
       history.replace(RouterPath.Home);
@@ -130,6 +129,7 @@ export const BrowserPage: FC<BrowserPageProps> = () => {
           onSearch={handleSearch}
           expanded={expanded}
           heading={getSearchResultHeading(query)}
+          query={query}
         />
       </Loader>
     </article>

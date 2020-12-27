@@ -21,7 +21,6 @@ export class GithubAuthService {
     url.searchParams.append('client_id', this.clientId);
     url.searchParams.append('redirect_uri', redirectURI);
     url.searchParams.append('allow_signup', 'true');
-    // @todo: also send state?
     window.location.replace(url.toString());
   }
 
