@@ -3,7 +3,6 @@ import { AuthContext } from '../../components/AuthProvider';
 import { useHistory } from 'react-router-dom';
 import { RouterPath } from '../../constants';
 import { RepositoryList } from '../../components/RepositoryList';
-import { CircularProgress } from '@material-ui/core';
 import {
   RepositoryDetailsQueryResultData,
   RepositoryExpandedDetails,
@@ -14,6 +13,7 @@ import {
 } from '../../types';
 import { REPOSITORY_DETAILS, REPOSITORY_SEARCH, VIEWER_REPOSITORIES } from '../../services/api/queries';
 import { useLazyQuery } from '@apollo/client';
+import { Loader } from '../../components/Loader';
 
 type BrowserPageProps = {};
 
@@ -111,15 +111,15 @@ export const BrowserPage: FC<BrowserPageProps> = () => {
 
   return(
     <article>
-      {isLoading
-        ? <CircularProgress />
-        : <RepositoryList
+      <Loader show={isLoading}>
+        <RepositoryList
           data={repositoryList}
           onExpanded={handleExpandedItem}
           onSearch={handleSearch}
           expanded={expanded}
           heading={getSearchResultHeading(query)}
-        />}
+        />
+      </Loader>
     </article>
   );
 };

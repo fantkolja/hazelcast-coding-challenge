@@ -1,0 +1,16 @@
+.loadingContent {
+  position: relative;
+  z-index: 0;
+}
+
+.loaderContainer {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+  opacity: 1;
+  background-color: rgba(white, .7);
+}
