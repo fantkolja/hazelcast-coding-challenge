@@ -11,7 +11,7 @@ import {
   RepositoryListItem,
   RepositoryListItemQueryResultEdge
 } from '../../types';
-import { REPOSITORY, VIEWER_REPOSITORIES } from '../../services/api/queries';
+import { REPOSITORY, SEARCH, VIEWER_REPOSITORIES } from '../../services/api/queries';
 
 type BrowserPageProps = {};
 
@@ -23,7 +23,17 @@ export const BrowserPage: FC<BrowserPageProps> = () => {
   const [expanded, setExpanded] = useState<RepositoryExpandedDetails | null>(null);
 
   const handleSearch = (query: string) => {
-    console.log(query);
+    if (query) {
+      client
+        .query<any>({
+          query: SEARCH,
+          variables: { query },
+        })
+        .then(result => {
+          console.log(result);
+        });
+      // @todo: handle error
+    }
   };
 
   const handleExpandedItem = useCallback((item: RepositoryListItem) => {
@@ -48,6 +58,7 @@ export const BrowserPage: FC<BrowserPageProps> = () => {
             ],
           });
         });
+      // @todo: handle error
     }
   }, [expanded, client]);
 

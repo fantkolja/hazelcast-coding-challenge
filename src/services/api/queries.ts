@@ -38,3 +38,23 @@ export const REPOSITORY = gql`
     }
   }
 `;
+
+export const SEARCH = gql`
+  query Repository($query: String!) {
+    search(type: REPOSITORY, query: $query, first: ${dataPageSize}) {
+    repositoryCount
+    edges {
+      cursor
+      node {
+        ... on Repository {
+          name
+          id
+          owner {
+            login
+          }
+        }
+      }
+    }
+  }
+  }
+`;
