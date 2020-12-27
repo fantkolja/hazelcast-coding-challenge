@@ -13,3 +13,5 @@ export enum RequiredEnvVar {
 export const tokenStorageKey = 'GITHUB_ACCESS_TOKEN';
 
 export const dataPageSize = 10;
+
+export const chartNodeID = 'lineChart';

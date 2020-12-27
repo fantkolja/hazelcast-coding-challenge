@@ -55,19 +55,20 @@ export const BrowserPage: FC<BrowserPageProps> = () => {
   const [expanded, setExpanded] = useState<string | null>(null);
 
   const handleExpandedItem = useCallback((item: RepositoryListItem) => {
-    client
-      .query({
-        query: REPOSITORY,
-        variables: { name: item.name, owner: item.owner },
-      })
-      .then(result => {
-        console.log(result);
-        setExpanded(item.id);
-      });
-    setTimeout(() => {
-      client.stop();
-    }, 100);
-  }, []);
+    if (expanded === item.id) {
+      setExpanded(null);
+    } else {
+      client
+        .query({
+          query: REPOSITORY,
+          variables: { name: item.name, owner: item.owner },
+        })
+        .then(result => {
+          console.log(result);
+          setExpanded(item.id);
+        });
+    }
+  }, [expanded]);
 
   // @todo: useRedirect()?
   // @todo: handle error

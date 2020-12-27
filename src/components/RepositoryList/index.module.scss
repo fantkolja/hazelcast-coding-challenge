@@ -1,8 +1,16 @@
 .repositoryList {
   width: 100%;
   overflow: hidden auto;
+  position: relative;
+  max-width: 1024px;
+  display: flex;
+  justify-content: center;
 }
 
-.heading2 {
-  height: 800px;
+.heading {
+}
+
+.chartContainer {
+  //position: relative;
+  //max-width: 700px;
 }

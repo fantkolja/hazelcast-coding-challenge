@@ -41,3 +41,7 @@ export interface RepositoryListItemQueryResultEdge {
   cursor: string;
   node: RepositoryListItemQueryResultNode;
 }
+
+export interface LineChartDataItem {
+  timestamp: string;
+}
