@@ -11,8 +11,6 @@ export const HomePage: FC = () => {
   const goToBrowserPage = () => history.push(RouterPath.Browser);
   const signIn = () => onAuthStart();
 
-  console.log(token);
-
   return(
     <article className={styles.homePage}>
       <Typography
