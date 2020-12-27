@@ -15,7 +15,7 @@ Builds the app for production to the `build` folder.\
 ## RELEASE NOTES
 
 ### Further / Skipped steps (due to the lack of time and nature of this project)
-- [ ] Increase test coverage
+- [ ] Increase test coverage (currently there are only two modules tested: 1 component and 1 service)
 - [ ] Handle pagination
 - [ ] Add a "scrollTo" behavior on the `/browser` page. When the user opens a repository details
   the window should scroll so that the upper bound of the opened repository is on top
