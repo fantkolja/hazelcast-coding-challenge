@@ -17,10 +17,10 @@ export const AuthCallback = () => {
         .then(() => goTo(RouterPath.Browser))
         .catch(() => goTo(RouterPath.Home));
     } else {
-      console.warn('[WARN:AuthCallback] URL does not contain the code query param. Redirecting to the home page)');
+      console.warn('[WARN:AuthCallback] URL does not contain the code query param. Redirecting to the home page');
       goTo(RouterPath.Home);
     }
-  }, [history, onCodeReceive]);
+  }, [history, onCodeReceive, goTo]);
 
   return (
     <p>Authenticating...</p>
